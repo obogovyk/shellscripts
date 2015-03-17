@@ -1,6 +1,6 @@
 #!/bin/bash
 
-execute="/opt/couchbase/bin/couchbase-cli bucket-$1 -u Administrator -p sonora -c $2:8091"
+execute="/opt/couchbase/bin/couchbase-cli bucket-$1 -u Administrator -p ***** -c $2:8091"
 
 case $1 in
 	list) $execute | grep -v "^ "
