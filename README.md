@@ -1,2 +1,0 @@
-# shellscripts
-Bash/Shell Scripts
