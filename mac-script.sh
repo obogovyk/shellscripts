@@ -25,19 +25,19 @@ for i in ${BP_ARR[@]}
     do
         case $i in
             Amazon )
-                cp Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest_Amazon.xml Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest.xml
+                cp Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest_Amazon.xml Src/SrcDestination/Project.Android/Properties/AndroidManifest.xml
             ;;
             1136x640Tablet )
-                cp Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest_Tablet.xml Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest.xml
+                cp Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest_Tablet.xml Src/SrcDestination/ProjectName.Android/Properties/AndroidManifest.xml
             ;;
             1136x640 )
-                cp Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest_Large.xml Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest.xml
+                cp Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest_Large.xml Src/SrcDestination/ProjectName.Android/Properties/AndroidManifest.xml
             ;;
             854x480 )
-                cp Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest_Medium.xml Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest.xml
+                cp Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest_Medium.xml Src/SrcDestination/ProjectName.Android/Properties/AndroidManifest.xml
             ;;
             480x320 )
-                cp Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest_Small.xml Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest.xml
+                cp Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest_Small.xml Src/SrcDestination/ProjectName.Android/Properties/AndroidManifest.xml
             ;;
         esac
 
@@ -58,8 +58,8 @@ for i in ${BP_ARR[@]}
             ./premake4 --target=Android $DEV $Autotests --config=Release xamarin
         fi
         cd ..
-        xbuild "CaesarsSlots\CaesarsSlots.Android\CaesarsSlots.Android.Android.csproj" /p:Configuration=Release /t:Clean
-        xbuild "Src/CaesarsSlots/CaesarsSlots.Android/CaesarsSlots.Android.Android.csproj" /p:Configuration=Release /t:SignAndroidPackage
+        xbuild "ProjectName\ProjectName.Android\ProjectName.Android.Android.csproj" /p:Configuration=Release /t:Clean
+        xbuild "Src/ProjectName/ProjectName.Android/ProjectName.Android.Android.csproj" /p:Configuration=Release /t:SignAndroidPackage
 
-        mv Bin/Android/*-Signed.apk RESULT/com.playtika.caesarscasino-${i}Signed.apk
+        mv Bin/Android/*-Signed.apk RESULT/com.{%project%}.{%ProjectName%}-${i}Signed.apk
     done
