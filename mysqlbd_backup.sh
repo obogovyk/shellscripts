@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-# VARIABLES
 DAYOFWEEK=$(date +%w)
 LOGDATE=$(date +%d.%m.%Y)
 LOGHOUR=$(date +%H:%M)
@@ -15,7 +13,6 @@ TAR_TMP=tmp.tar.gz
 TAR_INCNAME=false
 MAILADDR=(user1@example.com,user2@example.com,user3@example.com)
 
-# FUNCTIONS
 mail_backupdir_err() {
     echo "WARNING! Backup directory \"${BACKUP_DIR}\" not found, but new directory created. Backup files will be saved here." | mail -s "WARNING! \
     Backup directory not found, but new directory created." user1@example.com
@@ -63,23 +60,23 @@ if [ -d "/home/tmp_backup" ]; then
 fi
 }
 
-# BEGIN BACKUP / CHECK USER...
+# BEGIN BACKUP...
 if [ ${UID} -ne "0" ]; then
     echo "WARNING! Only ROOT allow to run \"${0}\" script."
     exit 1
 else
-    echo "Welcome Root! Continue process..."
+    echo "Welcome to MySQLd Backup! Continue..."
 fi
 
 # CHECK LOGFILE & LOGFILE SIZE
 if [ -f ${LOGFILE} ]; then
 	if [ ${LOGLIMIT_MB} -le "10" ]; then
 echo "--- ${LOGDATE} ${LOGHOUR} ---" >> ${LOGFILE}
-echo "SUCCESS! Logfile \"${LOGFILE}\" exist, log filesize ${LOGLIMIT_MB} Mb. Continue process..." >> ${LOGFILE}
+echo "SUCCESS! Logfile \"${LOGFILE}\" exist, log filesize is ${LOGLIMIT_MB} Mb. Continue process..." >> ${LOGFILE}
     else
     cat /dev/null > ${LOGFILE}
     echo "--- ${LOGDATE} ${LOGHOUR} ---" >> ${LOGFILE}
-    echo "SUCCESS! Logfile \"${LOGFILE}\" exist, log filesize ${LOGLIMIT_MB} Mb. Continue process..." >> ${LOGFILE}
+    echo "SUCCESS! Logfile \"${LOGFILE}\" exist, log filesize is ${LOGLIMIT_MB} Mb. Continue process..." >> ${LOGFILE}
 	fi
 else
     touch /var/log/mysqldb_backup.log
@@ -99,7 +96,7 @@ fi
 
 # CHECK FREE SPACE
 if [ ${DISK_SPACE} -lt ${DISK_LIMIT} ]; then
-    echo "WARNING! Low disk space on \"${PARTITION}\"! Please clean up your drive minimum to $((${DISK_LIMIT}/1024)) Gb." >> ${LOGFILE}
+    echo "WARNING! Low disk space on \"${PARTITION}\"! Please clean up your drive to $((${DISK_LIMIT}/1024)) Gb." >> ${LOGFILE}
     mail_freespace_err
     exit 1
 else
@@ -122,7 +119,7 @@ tar_backup
 # CLEAR TEMP DIRECTORY
 post_backup
 
-# CHECK TAR AND GET TAR INFO
+# CHECK TAR AND TAR INFORMATION
 CHECK_TAR=$(ls /home/db_backup/ | grep -c ${LOGDATE})
 if [ ${CHECK_TAR} -eq "1" ]; then
     if [ ${TAR_INCNAME} = "true" ]; then
@@ -139,10 +136,10 @@ fi
 if [ ${DAYOFWEEK} -eq "0" ]; then
     for i in "${MAILADDR[@]}"
     do
-    echo -e "SUCCESS! Archive successfully created ${LOGDATE} at $(date +%H:%M).\nArchive size is $TAR_SIZE Mb. Backup partition \"${PARTITION}\" size is: $((${DISK_SPACE}/1024)) Gb." | mail -s "SUCCESS! Zabbix backup successfully created." ${i}
+    	echo -e "SUCCESS! Archive successfully created ${LOGDATE} at $(date +%H:%M).\nArchive size is $TAR_SIZE Mb. Backup partition \"${PARTITION}\" size is: $((${DISK_SPACE}/1024)) Gb." | mail -s "SUCCESS! Zabbix backup successfully created." ${i}
     done
 else
     exit 0
 fi
 
-# ...END BACKUP
+# ...END BACKUP 
