@@ -11,7 +11,7 @@ DISK_LIMIT=5120
 BACKUP_DIR=/home/db_backup
 TAR_TMP=tmp.tar.gz
 TAR_INCNAME=false
-MAILADDR=(user1@example.com,user2@example.com,user3@example.com)
+MAILADDR=(user1@example.com user2@example.com user3@example.com)
 
 mail_backupdir_err() {
     echo "WARNING! Backup directory \"${BACKUP_DIR}\" not found, but new directory created. Backup files will be saved here." | mail -s "WARNING! \
