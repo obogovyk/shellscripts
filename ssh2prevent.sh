@@ -11,7 +11,7 @@ FILTER="Invalid user"
 COUNTER=50
 ACCESS_LIST=( $(cat /var/log/secure | grep "$FILTER" | awk {'print $10'} | sort | uniq) )
 
-iptables_add(){
+iptables_save(){
     service iptables save
     service iptables restart
 }
@@ -25,4 +25,4 @@ do
     fi
 done
 
-iptables_add
+iptables_save
