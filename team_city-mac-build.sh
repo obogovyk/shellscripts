@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Copyright (c)2015 Bogovyk Oleksandr <obogovyk@gmail.com>
-# mac-script.sh
+# Author: Bogovyk Oleksandr <obogovyk@gmail.com>
 # Build parameters for TeamCity Build Agent on OSX for Xamarin Platform.
+# team_city-mac-build.sh
 
 BP="%BuildParams%"
 BP_ARR=$(echo $BP | sed -e 's/,/ /g')
