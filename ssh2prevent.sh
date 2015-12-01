@@ -1,6 +1,6 @@
 #!/bin/bash
 
-Author: Bogovyk Oleksandr <obogovyk@gmail.com>
+# Author: Bogovyk Oleksandr <obogovyk@gmail.com>
 # ssh2prevent.sh
 
 CHAIN="BLACKLIST"
