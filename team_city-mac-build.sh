@@ -29,19 +29,19 @@ for i in ${BP_ARR[@]}
     do
         case $i in
             Amazon )
-                cp Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest_Amazon.xml Src/SrcDestination/Project.Android/Properties/AndroidManifest.xml
+                cp Src/*/*.Android/Properties/AndroidManifest_Amazon.xml Src/SrcDestination/Project.Android/Properties/AndroidManifest.xml
             ;;
             1136x640Tablet )
-                cp Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest_Tablet.xml Src/SrcDestination/ProjectName.Android/Properties/AndroidManifest.xml
+                cp Src/*/*.Android/Properties/AndroidManifest_Tablet.xml Src/SrcDestination/ProjectName.Android/Properties/AndroidManifest.xml
             ;;
             1136x640 )
-                cp Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest_Large.xml Src/SrcDestination/ProjectName.Android/Properties/AndroidManifest.xml
+                cp Src/*/*.Android/Properties/AndroidManifest_Large.xml Src/SrcDestination/ProjectName.Android/Properties/AndroidManifest.xml
             ;;
             854x480 )
-                cp Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest_Medium.xml Src/SrcDestination/ProjectName.Android/Properties/AndroidManifest.xml
+                cp Src/*/*.Android/Properties/AndroidManifest_Medium.xml Src/SrcDestination/ProjectName.Android/Properties/AndroidManifest.xml
             ;;
             480x320 )
-                cp Src/CaesarsSlots/CaesarsSlots.Android/Properties/AndroidManifest_Small.xml Src/SrcDestination/ProjectName.Android/Properties/AndroidManifest.xml
+                cp Src/*/*.Android/Properties/AndroidManifest_Small.xml Src/SrcDestination/ProjectName.Android/Properties/AndroidManifest.xml
             ;;
         esac
 
