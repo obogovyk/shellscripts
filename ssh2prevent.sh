@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c)2015 Bogovyk Oleksandr <obogovyk@gmail.com>
+Author: Bogovyk Oleksandr <obogovyk@gmail.com>
 # ssh2prevent.sh
 
 CHAIN="BLACKLIST"
