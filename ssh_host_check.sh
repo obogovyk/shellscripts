@@ -1,3 +1,7 @@
+# Author: Bogovyk Oleksandr <obogovyk@gmail.com>
+# ssh_host_check.sh
+# -----------------
+
 #!/bin/bash
 
 username="{username}"
