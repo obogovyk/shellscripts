@@ -2,11 +2,11 @@
 
 DISC="sda"
 
-echo "Schedulers: "
+echo "Default scheduler: "
 cat /sys/block/$DISC/queue/scheduler
 echo ""
 
-for S in noop deadline cfq; do 
+for S in $(sed "s/\[//;s/\]//" /sys/block/sda/queue/scheduler); do 
     echo $S > /sys/block/$DISC/queue/scheduler;
 
     cat /sys/block/$DISC/queue/scheduler
