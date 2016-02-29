@@ -1,26 +1,37 @@
 #!/bin/bash
 
 # Author: Bogovyk Oleksandr <obogovyk@gmail.com>
-# ssh2prevent.sh
+# Script: ssh2prevent.sh
 
 CHAIN="BLACKLIST"
 RULE_NUM=1
 INTERFACE="eth0"
-DPORT=22
+SSH_PORT=22
 FILTER="Invalid user"
-COUNTER=50
-ACCESS_LIST=( $(cat /var/log/secure | grep "$FILTER" | awk {'print $10'} | sort | uniq) )
+COUNTER=20
+IP_BLACK_LIST=( $(cat /var/log/secure | grep "$FILTER" | awk {'print $10'} | sort | uniq) )
+
+if_chain_exists() {
+    iptables -nL $CHAIN 1 > /dev/null
+}
 
 iptables_save(){
     service iptables save
     service iptables restart
 }
 
-for i in ${ACCESS_LIST[@]}
+if_chain_exists
+
+if [ $? != 0 ]; then
+    iptables -N $CHAIN
+    iptables -A $CHAIN -j RETURN
+fi
+
+for i in ${IP_BLACK_LIST[@]}
 do
     if [ $(cat /var/log/secure | grep $i | wc -l) -ge $COUNTER ]; then
         if [ $(iptables -nvL $CHAIN | grep $i | wc -l) -eq 0 ]; then
-        iptables -I $CHAIN $RULE_NUM -i $INTERFACE -s $i -p tcp -m tcp --dport $DPORT -j REJECT --reject-with icmp-host-prohibited
+            iptables -I $CHAIN $RULE_NUM -i $INTERFACE -s $i -p tcp -m tcp --dport $SSH_PORT -j REJECT --reject-with icmp-host-prohibited
         fi
     fi
 done
