@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Copyright (c)2014 Bogovyk Oleksandr <obogovyk@gmail.com>
-# mysqlbd_backup.sh
+# Author: Bogovyk Oleksandr <obogovyk@gmail.com>
+# Script: mysqlbd_backup.sh
 
 DAYOFWEEK=$(date +%w)
 LOGDATE=$(date +%d.%m.%Y)
