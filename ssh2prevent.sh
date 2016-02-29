@@ -30,7 +30,7 @@ fi
 for i in ${IP_BLACK_LIST[@]}
 do
     if [ $(cat /var/log/secure | grep $i | wc -l) -ge $COUNTER ]; then
-        if [ $(iptables -nvL $CHAIN | grep $i | wc -l) -eq 0 ]; then
+        if [ $(iptables -nL $CHAIN | grep $i | wc -l) -eq 0 ]; then
             iptables -I $CHAIN $RULE_NUM -i $INTERFACE -s $i -p tcp -m tcp --dport $SSH_PORT -j REJECT --reject-with icmp-host-prohibited
         fi
     fi
