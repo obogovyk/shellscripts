@@ -3,7 +3,7 @@
 # Author: Bogovyk Oleksandr <obogovyk@gmail.com>
 # Script: ssh2prevent.sh
 
-CHAIN="BLACKLIST"
+CHAIN="SSH_BLACKLIST"
 RULE_NUM=1
 INTERFACE="eth0"
 SSH_PORT=22
