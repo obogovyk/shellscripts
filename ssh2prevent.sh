@@ -12,7 +12,7 @@ COUNTER=20
 IP_BLACK_LIST=( $(cat /var/log/secure | grep "$FILTER" | awk {'print $10'} | sort | uniq) )
 
 if_chain_exists() {
-    iptables -nL $CHAIN 1 &> /dev/null
+    iptables -nL $CHAIN 2>&1 /dev/null
 }
 
 iptables_save(){
