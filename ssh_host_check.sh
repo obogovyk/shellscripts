@@ -12,7 +12,7 @@ host3.example.com
 )
 
 for i in ${hosts[*]}; do
-    ping -c 1 $i &> /dev/null
+    ping -c 1 $i 2>&1 /dev/null
     if [ $? -eq 0 ]; then
         livehosts+=($i)
         echo "$i: Ping success."
