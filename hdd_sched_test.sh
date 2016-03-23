@@ -11,4 +11,4 @@ for S in $(sed "s/\[//;s/\]//" /sys/block/sda/queue/scheduler); do
 
     cat /sys/block/$DISC/queue/scheduler
     sync && /sbin/hdparm -tT /dev/$DISC && echo "----"
-    sleep 10
+    sleep 5
