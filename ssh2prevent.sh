@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Author: Bogovyk Oleksandr <obogovyk@gmail.com>
 # Script: ssh2prevent.sh
+# Author: Bogovyk Oleksandr <obogovyk@gmail.com>
 
 CHAIN="SSH_BLACKLIST"
 RULE_NUM=1
