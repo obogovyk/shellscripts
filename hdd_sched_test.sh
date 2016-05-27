@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Script: hdd_sched_test.sh
+# Author: Bogovyk Oleksanr <obogovyk@gmail.com>
+
 DISC="sda"
 
 echo "Default scheduler: "
