@@ -1,7 +1,11 @@
 #!/bin/bash
 
+# Script: cmp_arr_diff.sh
+# Author: Bogovyk Oleksanr <obogovyk@gmail.com>
+
 # TEMPLATE
 # TODO...
+
 export LC_ALL=en_US.utf8
 
 TAR=$(which tar)
