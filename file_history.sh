@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script: cmp_arr_diff.sh
+# Script: file_history.sh
 # Author: Bogovyk Oleksanr <obogovyk@gmail.com>
 
 # TEMPLATE
