@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script: jslint.sh
+# Script: cmp_arr_diff.sh
 # Author: Bogovyk Oleksanr <obogovyk@gmail.com>
 
 nums1=( 3 5 8 4 9 2 )
