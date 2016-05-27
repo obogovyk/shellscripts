@@ -1,8 +1,7 @@
-# Author: Bogovyk Oleksandr <obogovyk@gmail.com>
-# ssh_host_check.sh
-# -----------------
-
 #!/bin/bash
+
+# Script: ssh_host_check.sh
+# Author: Bogovyk Oleksandr <obogovyk@gmail.com>
 
 username="{username}"
 hosts=(
