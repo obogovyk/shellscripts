@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# TEMPLATE
+# TODO...
 export LC_ALL=en_US.utf8
 
 TAR=$(which tar)
