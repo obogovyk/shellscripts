@@ -13,7 +13,7 @@ host3.example.com
 host100.example.com
 )
 
-for i in ${hosts[*]}; do
+for i in ${hosts[@]}; do
     ping -c 1 $i 2>&1 /dev/null
     if [ $? -eq 0 ]; then
         livehosts+=($i)
@@ -27,7 +27,7 @@ done
 echo ""
 echo "Found: $x live hosts."
 
-for i in ${livehosts[*]}; do 
+for i in ${livehosts[@]}; do 
     z=$(ssh $username@$i 'hostname -f')
 
     if [ "$i" == "$z" ]; then
@@ -38,6 +38,6 @@ for i in ${livehosts[*]}; do
     fi
 done
 
-for i in ${diedhosts[*]}; do 
+for i in ${diedhosts[@]}; do 
     echo "$i: died (no ping)." > /opt/hosts.noping
 done
