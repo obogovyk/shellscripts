@@ -1,7 +1,7 @@
 #!/bin/bash
 
+# Script: mysqlbd_backup-percona.sh
 # Author: Bogovyk Oleksandr <obogovyk@gmail.com>
-# Script: mysqlbd_backup.sh
 
 DAYOFWEEK=$(date +%w)
 LOGDATE=$(date +%d.%m.%Y)
