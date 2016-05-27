@@ -1,8 +1,13 @@
 #!/bin/bash
 
+# Name: jslint.sh
+# Author: Bogovyk Oleksanr <obogovyk@gmail.com>
+
 JSLINT=$(whereis jslint|awk {'print $2'})
+JSDIR=''
+
 if [ ! -z "$JSLINT" ]; then
-    for i in $(find `pwd` -type f -name *.js); do
+    for i in $(find $JSDIR -type f -name *.js); do
         $JSLINT $i
     done
 else
