@@ -9,6 +9,8 @@ hosts=(
 host1.example.com
 host2.example.com
 host3.example.com
+...
+host100.example.com
 )
 
 for i in ${hosts[*]}; do
