@@ -4,7 +4,7 @@
 # Author: Bogovyk Oleksanr <obogovyk@gmail.com>
 
 JSLINT=$(whereis jslint|awk {'print $2'})
-JSDIR=''
+JSDIR='/var/www/html/lookatmyhorse'
 
 if [ ! -z "$JSLINT" ]; then
     for i in $(find $JSDIR -type f -name *.js); do
