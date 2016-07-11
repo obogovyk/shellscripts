@@ -1,10 +1,7 @@
 #!/bin/bash
 
-# Script: file_history.sh
 # Author: Bogovyk Oleksanr <obogovyk@gmail.com>
-
-# TEMPLATE
-# TODO...
+# Description: File history backup using RSYNC
 
 export LC_ALL=en_US.utf8
 
@@ -16,16 +13,16 @@ CURR_DATE=$(date +%d.%m.%Y-%H:%M:%S)
 YEST_DATE=$(date +%d.%m.%Y-%H:%M:%S -d "-1 day")
 
 if [ "$(id -u)" != "0" ]; then
-  echo "This script must be run as root." 1>&2
+  echo "This script must be run as root (or with sudo)." 1>&2
   exit 1
 fi
 
 if [ -z $RSYNC ] || [ -z $TAR ]; then
-  echo "Please install necessary packages: TAR, RSYNC and try again."
+  echo "[INFO]: Please install necessary packages - TAR, RSYNC and try again."
   exit 1
 fi
 
-caheck_sync_dirs() {
+check_exist_dirs() {
     if [ ! -d $BACKUP_DIR ]; then
         echo "Backup directory: $BACKUP_DIR not foud!"
         exit 1
