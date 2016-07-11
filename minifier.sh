@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Description: CSS & JS npm minifier 
+
 MINIFY=$(whereis minify|awk {'print $2'})
 TYPES=( "*.css" ) # "*.js"
 FILES=()
