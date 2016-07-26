@@ -25,7 +25,7 @@ for x in ${IP_BLACK_LIST[@]}; do
 done
 
 if_chain_exists() {
-    iptables -nL $CHAIN 2>&1 /dev/null
+    iptables -nL $CHAIN &> /dev/null
 }
 
 iptables_save(){
