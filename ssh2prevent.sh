@@ -9,7 +9,7 @@ INTERFACE="eth0"
 SSH_PORT=22
 FILTER="Invalid user"
 COUNTER=5
-IP_IGNORE_LIST=( 127.0.0.1, 131.34.22.11 )
+IP_IGNORE_LIST=( "127.0.0.1" "131.34.22.11" )
 IP_BLACK_LIST=( $(cat /var/log/secure | grep "$FILTER" | awk {'print $10'} | sort | uniq) )
 
 if_chain_exists() {
