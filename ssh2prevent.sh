@@ -13,15 +13,16 @@ IP_IGNORE_LIST=( "127.0.0.1" "133.33.22.11" )
 IP_BLACK_LIST=( $(cat /var/log/secure | grep -E -o "$FILTER" | sort | uniq) )
 FILTERED_LIST=()
 
-#for a in ${IP_IGNORE_LIST[@]} ; do
-#   skip=
-#    for b in ${IP_BLACK_LIST[@]}; do
-#        if [ $a != $b ]; then
-#            skip=1
-#            break
-#    done
-#    FILTERED_LIST+=("$a")
-#done
+for x in ${IP_BLACK_LIST[@]}; do
+    skip=
+    for y in ${IP_IGNORE_LIST[@]}; do
+        if [ $x -eq $y ]; then
+            skip=1
+            break
+        fi
+    done
+    [[ -n $skip ]] || FILTERED_LIST+=("$x")
+done
 
 if_chain_exists() {
     iptables -nL $CHAIN 2>&1 /dev/null
