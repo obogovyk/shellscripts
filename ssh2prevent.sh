@@ -7,10 +7,10 @@ CHAIN="SSH_BLACKLIST"
 RULE_NUM=1
 INTERFACE="eth0"
 SSH_PORT=22
-FILTER="grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}"
+FILTER="([0-9]{1,3}[\.]){3}[0-9]{1,3}"
 COUNTER=5
 IP_IGNORE_LIST=( "127.0.0.1" "131.34.22.11" )
-IP_BLACK_LIST=( $(cat /var/log/secure | grep "$FILTER" | sort | uniq) )
+IP_BLACK_LIST=( $(cat /var/log/secure | grep -E -o "$FILTER" | sort | uniq) )
 
 if_chain_exists() {
     iptables -nL $CHAIN 2>&1 /dev/null
