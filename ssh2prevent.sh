@@ -8,7 +8,7 @@ RULE_NUM=1
 INTERFACE="eth0"
 SSH_PORT=22
 FILTER="Invalid user"
-COUNTER=20
+COUNTER=5
 IP_BLACK_LIST=( $(cat /var/log/secure | grep "$FILTER" | awk {'print $10'} | sort | uniq) )
 
 if_chain_exists() {
