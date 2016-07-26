@@ -11,6 +11,17 @@ FILTER="([0-9]{1,3}[\.]){3}[0-9]{1,3}"
 COUNTER=5
 IP_IGNORE_LIST=( "127.0.0.1" "133.33.22.11" )
 IP_BLACK_LIST=( $(cat /var/log/secure | grep -E -o "$FILTER" | sort | uniq) )
+FILTERED_LIST=()
+
+for a in ${IP_IGNORE_LIST[@]} ; do
+    skip=
+    for b in ${IP_BLACK_LIST[@]}; do
+        if [ $a != $b ]; then
+            skip=1
+            break
+    done
+    FILTERED_LIST+=("$a")
+done
 
 if_chain_exists() {
     iptables -nL $CHAIN 2>&1 /dev/null
@@ -28,7 +39,7 @@ if [ $? != 0 ]; then
     iptables -A $CHAIN -j RETURN
 fi
 
-for i in ${IP_BLACK_LIST[@]}
+for i in ${FILTERED_LIST[@]}
 do
     if [ grep -c $i /var/log/secure -ge $COUNTER ]; then
         if [ $(iptables -nL $CHAIN | grep $i | wc -l) -eq 0 ]; then
