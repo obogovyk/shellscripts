@@ -3,13 +3,13 @@
 # Script: ssh2prevent.sh
 # Author: Bogovyk Oleksandr <obogovyk@gmail.com>
 
-CHAIN="SSH_BLACKLIST"
+CHAIN="SSH2PREVENT"
 RULE_NUM=1
 INTERFACE="eth0"
 SSH_PORT=22
 FILTER="([0-9]{1,3}[\.]){3}[0-9]{1,3}"
 COUNTER=5
-IP_IGNORE_LIST=( "127.0.0.1" "131.34.22.11" )
+IP_IGNORE_LIST=( "127.0.0.1" "133.33.22.11" )
 IP_BLACK_LIST=( $(cat /var/log/secure | grep -E -o "$FILTER" | sort | uniq) )
 
 if_chain_exists() {
