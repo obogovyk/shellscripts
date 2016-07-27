@@ -4,7 +4,6 @@
 # Author: Bogovyk Oleksandr <obogovyk@gmail.com>
 
 export LC_ALL=en_US.utf8
-GENERAL_LOG="/var/log/ssh2prevent.log"
 
 CHAIN="SSH2PREVENT"
 RULE_NUM=1
@@ -16,10 +15,6 @@ SSH_LOG="/var/log/secure"
 IP_IGNORE_LIST=( "127.0.0.1" "133.33.22.11" )
 IP_BLACK_LIST=( $(cat $SSH_LOG | grep -E -o "$FILTER" | sort | uniq) )
 FILTERED_LIST=()
-
-if [! -f $GENERAL_LOG ]; then
-    touch $GENERAL_LOG
-fi
 
 for x in ${IP_BLACK_LIST[@]}; do
     skip=
@@ -59,5 +54,3 @@ do
 done
 
 iptables_save
-
-echo "date: ${#RECENT_IPS[@]} have ben added to $CHAIN." >> $GENERAL_LOG
