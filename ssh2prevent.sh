@@ -32,7 +32,7 @@ for x in ${IP_BLACK_LIST[@]}; do
     [[ -n $skip ]] || FILTERED_LIST+=("$x")
 done
 
-if_chain_exists() {
+chain_exists() {
     iptables -nL $CHAIN &> /dev/null
 }
 
@@ -41,20 +41,23 @@ iptables_save(){
     service iptables restart
 }
 
-if_chain_exists
-
+chain_exists
 if [ $? != 0 ]; then
     iptables -N $CHAIN
     iptables -A $CHAIN -j RETURN
 fi
 
+ADDED_IPS=()
 for i in ${FILTERED_LIST[@]}
 do
     if [ grep -c $i /var/log/secure -ge $COUNTER ]; then
         if [ $(iptables -nL $CHAIN | grep $i | wc -l) -eq 0 ]; then
             iptables -I $CHAIN $RULE_NUM -i $INTERFACE -s $i -p tcp -m tcp --dport $SSH_PORT -j REJECT --reject-with icmp-host-prohibited
+            ADDED_IPS+=("$i")
         fi
     fi
 done
 
 iptables_save
+
+echo >> "date: ${#ADDED_IPS[@]} have ben added to $CHAIN."
