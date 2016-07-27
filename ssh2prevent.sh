@@ -47,17 +47,17 @@ if [ $? != 0 ]; then
     iptables -A $CHAIN -j RETURN
 fi
 
-ADDED_IPS=()
+RECENT_IPS=()
 for i in ${FILTERED_LIST[@]}
 do
     if [ grep -c $i /var/log/secure -ge $COUNTER ]; then
         if [ $(iptables -nL $CHAIN | grep $i | wc -l) -eq 0 ]; then
             iptables -I $CHAIN $RULE_NUM -i $INTERFACE -s $i -p tcp -m tcp --dport $SSH_PORT -j REJECT --reject-with icmp-host-prohibited
-            ADDED_IPS+=("$i")
+            RECENT_IPS+=("$i")
         fi
     fi
 done
 
 iptables_save
 
-echo >> "date: ${#ADDED_IPS[@]} have ben added to $CHAIN."
+echo "date: ${#RECENT_IPS[@]} have ben added to $CHAIN." >> $GENERAL_LOG
