@@ -24,7 +24,7 @@ fi
 for x in ${IP_BLACK_LIST[@]}; do
     skip=
     for y in ${IP_IGNORE_LIST[@]}; do
-        if [ $x -eq $y ]; then
+        if [ $x == $y ]; then
             skip=1
             break
         fi
