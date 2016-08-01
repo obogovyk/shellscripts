@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script: ssh2prevent.sh
+# Script: ssh2prevent.sh for RHEL-based distros
 # Author: Bogovyk Oleksandr <obogovyk@gmail.com>
 
 export LC_ALL=en_US.utf8
@@ -31,6 +31,10 @@ chain_exists() {
     iptables -nL $CHAIN &> /dev/null
 }
 
+#chain_clear() {
+#    iptables -F $CHAIN
+#}
+
 iptables_save(){
     service iptables save
     service iptables restart
@@ -42,11 +46,11 @@ if [ $? != 0 ]; then
     iptables -A $CHAIN -j RETURN
 fi
 
-for i in ${FILTERED_LIST[@]}
-do
-    if [ grep -c $i /var/log/secure -ge $COUNTER ]; then
+#chain_clear
+for i in ${FILTERED_LIST[@]}; do
+    if [ $(grep -c $i $SSH_LOG) -ge $COUNTER ]; then
         if [ $(iptables -nL $CHAIN | grep $i | wc -l) -eq 0 ]; then
-            iptables -I $CHAIN $RULE_NUM -i $INTERFACE -s $i -p tcp -m tcp --dport $SSH_PORT -j REJECT --reject-with icmp-host-prohibited
+            iptables -I $CHAIN $RULE_NUM -i $INTERFACE -s $i -p tcp -m tcp --dport $SSH_PORT -j REJECT --reject-with tcp-reset
         fi
     fi
 done
