@@ -2,6 +2,7 @@
 
 # Script: ssh2prevent.sh for RHEL-based distros
 # Author: Bogovyk Oleksandr <obogovyk@gmail.com>
+# Add to crontab: 59 * * * * {{path_to_script}}/ssh2prevent.sh > /dev/null 2>&1
 
 export LC_ALL=en_US.utf8
 
