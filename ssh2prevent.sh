@@ -4,9 +4,11 @@
 # Author: Bogovyk Oleksandr <obogovyk@gmail.com>
 # Add to crontab: 59 * * * * {{path_to_script}}/ssh2prevent.sh > /dev/null 2>&1
 
+#!/bin/bash
+
 export LC_ALL=en_US.utf8
 
-CHAIN="CR-SSH2PREVENT"
+CHAIN="SSH2PREVENT"
 INTERFACE="eth0"
 SSH_PORT=22
 D_FILTER="([0-9]{1,3}[\.]){3}[0-9]{1,3}"
@@ -15,7 +17,7 @@ COUNTER=5
 RULE_NUM=1
 IPTABLES=$(whereis iptables|awk {'print $2'})
 SSH_LOG="/var/log/secure"
-IP_IGNORE_LIST=( "127.0.0.1" "11.22.33.44" )
+IP_IGNORE_LIST=( "127.0.0.1" "77.222.158.71" "77.222.158.251" "77.222.158.135" "148.251.187.5" )
 IP_BLACK_LIST=( $(cat $SSH_LOG | grep $W_FILTER | grep -E -o $D_FILTER | sort | uniq) )
 FILTERED_LIST=()
 
