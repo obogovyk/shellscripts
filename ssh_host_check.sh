@@ -11,6 +11,8 @@ host3.example.com
 ...
 host100.example.com
 )
+livehosts=()
+diehosts=()
 
 for i in ${hosts[@]}; do
     ping -c 1 $i 2>&1 /dev/null
