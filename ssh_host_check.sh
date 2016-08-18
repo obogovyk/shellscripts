@@ -34,11 +34,11 @@ for i in ${livehosts[@]}; do
     if [ "$i" == "$z" ]; then
         echo -e "\033[1mHost $i equal hostname $z!\033[0m"
     else
-        echo "Host $i not equal hostname $z!" > /opt/hosts.notequal
+        echo "Host $i not equal hostname $z!" >> /opt/hosts.notequal
         echo "Host $i not equal hostname $z!"
     fi
 done
 
 for i in ${diedhosts[@]}; do 
-    echo "$i: died (no ping)." > /opt/hosts.noping
+    echo "$i: died (no ping)." >> /opt/hosts.noping
 done
