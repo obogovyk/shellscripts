@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Show swap useage by processes.
+
 SUM=0
 OVERALL=0
 
