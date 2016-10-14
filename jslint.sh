@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Script: jslint.sh
-# Author: Bogovyk Oleksanr <obogovyk@gmail.com>
-
 JSLINT=$(whereis jslint|awk {'print $2'})
 JSDIR='/var/www/html/lookatmyhorse'
 
