@@ -16,7 +16,7 @@ for DIR in $(find /proc/ -maxdepth 1 -type d | egrep "^/proc/[0-9]") ; do
    for SWAP in $(grep Swap $DIR/smaps 2>/dev/null | awk '{ print $2 }'); do
       (( SUM=$SUM+$SWAP ))
    done
- echo "PID=$PID - Swap used: ${SUM}K - [$PROG]"
+ echo "PID=$PID - Swap used: ${SUM}K [$PROG]"
  (( TOTAL=$TOTAL+$SUM ))
  SUM=0
 done
