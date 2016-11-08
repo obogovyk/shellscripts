@@ -12,6 +12,7 @@ BACKUP_DIR="/backup"
 CURR_DATE=$(date +%d.%m.%Y-%H:%M:%S)
 YEST_DATE=$(date +%d.%m.%Y-%H:%M:%S -d "-1 day")
 BACKUP_DIR_EMPTY=True
+BACKUP_EXPIRES_DAYS=0
 
 if [ "$(id -u)" != "0" ]; then
   echo "This script must be run as root (or with sudo privileges)." 1>&2
