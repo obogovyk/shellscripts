@@ -1,48 +1,45 @@
 #!/bin/bash
 
 # Author: Bogovyk Oleksanr <obogovyk@gmail.com>
-# Description: File history backup using RSYNC
+# Description: Simple file backup (with history) using RSYNC Utility
 
 export LC_ALL=en_US.utf8
 
 TAR=$(which tar)
 RSYNC=$(which rsync)
+DIRS=( "/opt/etc" "/opt" )
 BACKUP_DIR="/backup"
-HIST_DIRS=( "/opt/backup" "/bacula" )
 CURR_DATE=$(date +%d.%m.%Y-%H:%M:%S)
 YEST_DATE=$(date +%d.%m.%Y-%H:%M:%S -d "-1 day")
+BACKUP_DIR_EMPTY=True
 
 if [ "$(id -u)" != "0" ]; then
   echo "This script must be run as root (or with sudo privileges)." 1>&2
   exit 1
 fi
 
-if [ -z $RSYNC ] || [ -z $TAR ]; then
-  echo "[INFO]: Please install necessary packages - TAR, RSYNC and try again."
-  exit 1
-fi
+[ -z "$(which $RSYNC)" ] || [ -z "$(which $RSYNC)" ] && \
+{ echo "[INFO]: Please install necessary packages: TAR, RSYNC and try again."; exit 1; }
 
-check_exist_dirs() {
+check_backup_dir_exists() {
   if [ ! -d $BACKUP_DIR ]; then
     echo "Backup directory: $BACKUP_DIR doesn't exists!"
   exit 1
   fi
 }
 
-check_backup_dirs() {
-  if [ ! -d "$BACKUP_DIR/$YEST_DATE-latest" ] && [ ! -d "$BACKUP_DIR/*-full"]; then
-    return 1
-  else
-    return 0
-  fi
-}
+is_backup_dir_empty() {
+  if [ "$(ls -A $BACKUP_DIR)" ]; then
+    $BACKUP_DIR_EMPTY=False
+} 
 
 make_full_backup() {
-  mkdir $BACKUP_DIR/$CURR_DATE-full
-
-  for i in ${HIST_DIRS[@]}; do
-    cp -f $i/* $BACKUP_DIR/$CURR_DATE-full/
-  done
+  if [ ! "$(ls -A $BACKUP_DIR/*-full)" ]; then
+    mkdir $BACKUP_DIR/$CURR_DATE-full
+    for i in ${HIST_DIRS[@]}; do
+      cp -rf $i/* $BACKUP_DIR/$CURR_DATE-full/
+    done
+  fi  
 }
 
 make_latest_backup() {
@@ -53,12 +50,8 @@ make_latest_backup() {
   done
 }
 
-if [ check_backup_dirs -eq $0 ]; then
-    
-    elif 
-    # check full backup
-    # make latest
-fi
+
+### MAKE COMPARE TWO ARRAYS (DIRS vs BACKUP_DIR)
 
   # if ...
   # rm -rf
