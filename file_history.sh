@@ -37,20 +37,11 @@ is_backup_dir_empty() {
 make_full_backup() {
   if [ ! "$(ls -A $BACKUP_DIR/*-full)" ]; then
     mkdir $BACKUP_DIR/$CURR_DATE-full
-    for i in ${HIST_DIRS[@]}; do
+    for i in ${DIRS[@]}; do
       cp -rf $i/* $BACKUP_DIR/$CURR_DATE-full/
     done
   fi  
 }
-
-make_latest_backup() {
-  mkdir $CURR_DATE
-
-  for i in ${HIST_DIRS[@]}; do
-    cp -f $i $BACKUP_DIR/$YEST_DATE
-  done
-}
-
 
 ### MAKE COMPARE TWO ARRAYS (DIRS vs BACKUP_DIR)
 
