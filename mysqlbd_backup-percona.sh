@@ -17,7 +17,8 @@ TAR_INCNAME=false
 MAILADDR=(user1@example.com user2@example.com user3@example.com)
 
 mail_backupdir_err() {
-    echo "WARNING! Backup directory \"${BACKUP_DIR}\" not found, but new directory created. Backup files will be saved here." | mail -s "WARNING! \
+    echo "WARNING! Backup directory \"${BACKUP_DIR}\" not found, but new directory created. Backup files will be saved here."\
+    | mail -s "WARNING! \
     Backup directory not found, but new directory created." user1@example.com
 }
 
@@ -34,7 +35,7 @@ prep_backup() {
     mkdir /home/tmp_backup
 }
 
-backup_zabbixdb() {
+backup_zabbix_db() {
     mysqldump --single-transaction --default-character-set=utf8 -uroot -p****** zabbix > /home/tmp_backup/zabbix_sql.sql
 }
 
@@ -63,7 +64,7 @@ if [ -d "/home/tmp_backup" ]; then
 fi
 }
 
-# BEGIN BACKUP...
+# BEGIN BACKUP
 if [ ${UID} -ne "0" ]; then
     echo "WARNING! Only ROOT allow to run \"${0}\" script."
     exit 1
@@ -75,22 +76,22 @@ fi
 if [ -f ${LOGFILE} ]; then
 	if [ ${LOGLIMIT_MB} -le "10" ]; then
 echo "--- ${LOGDATE} ${LOGHOUR} ---" >> ${LOGFILE}
-echo "SUCCESS! Logfile \"${LOGFILE}\" exist, log filesize is ${LOGLIMIT_MB} Mb. Continue process..." >> ${LOGFILE}
+echo "SUCCESS! Logfile \"${LOGFILE}\" exist, log filesize is ${LOGLIMIT_MB} Mb. Continue process." >> ${LOGFILE}
     else
     cat /dev/null > ${LOGFILE}
     echo "--- ${LOGDATE} ${LOGHOUR} ---" >> ${LOGFILE}
-    echo "SUCCESS! Logfile \"${LOGFILE}\" exist, log filesize is ${LOGLIMIT_MB} Mb. Continue process..." >> ${LOGFILE}
+    echo "SUCCESS! Logfile \"${LOGFILE}\" exist, log filesize is ${LOGLIMIT_MB} Mb. Continue process." >> ${LOGFILE}
 	fi
 else
     touch /var/log/mysqldb_backup.log
     LOGFILE=/var/log/mysqldb_backup.log
     echo "--- ${LOGDATE} ${LOGHOUR} ---" >> ${LOGFILE}
-    echo "SUCCESS! Logfile \"${LOGFILE}\" exist, filesize ${LOGLIMIT_MB} Mb. Continue process..." >> ${LOGFILE}
+    echo "SUCCESS! Logfile \"${LOGFILE}\" was created, filesize ${LOGLIMIT_MB} Mb. Continue process." >> ${LOGFILE}
 fi
 
 # CHECK BACKUP DIRECTORY
 if [ -d ${BACKUP_DIR} ]; then
-    echo "SUCCESS! Backup directory \"${BACKUP_DIR}\" exists. Continue process..." >> ${LOGFILE}
+    echo "SUCCESS! Backup directory \"${BACKUP_DIR}\" exists. Continue process." >> ${LOGFILE}
 else
     echo "WARNING! Backup directory \"${BACKUP_DIR}\" not found, but new directory created." >> ${LOGFILE}
     create_backup_dir
@@ -106,14 +107,14 @@ else
     echo "SUCCESS! Disk space is $((${DISK_SPACE}/1024)) Gb. Backup begin ${LOGDATE} at ${LOGHOUR}..." >> ${LOGFILE}
 fi
 
-# PREPARE AND CHOOSE BACKUP TYPE
+# PREPARE & CHOOSE BACKUP TYPE
 if [ ${DAYOFWEEK} -eq "0" ]; then
     backup_fulldb
     backup_commit
 else
     prep_backup
     TAR_INCNAME=true
-    backup_zabbixdb
+    backup_zabbix_db
 fi
 
 # TAR BACKUP
@@ -122,7 +123,7 @@ tar_backup
 # CLEAR TEMP DIRECTORY
 post_backup
 
-# CHECK TAR AND TAR INFORMATION
+# CHECK TAR.GZ AND TAR.GZ INFORMATION
 CHECK_TAR=$(ls /home/db_backup/ | grep -c ${LOGDATE})
 if [ ${CHECK_TAR} -eq "1" ]; then
     if [ ${TAR_INCNAME} = "true" ]; then
