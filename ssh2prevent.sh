@@ -17,7 +17,7 @@ COUNTER=5
 RULE_NUM=1
 IPTABLES=$(whereis iptables|awk {'print $2'})
 SSH_LOG="/var/log/secure"
-IP_IGNORE_LIST=( "127.0.0.1" "77.222.158.71" "77.222.158.251" "77.222.158.135" "148.251.187.5" )
+IP_IGNORE_LIST=( "127.0.0.1" "77.222.xx.xx" "77.222.xx.xx" "77.222.xx.xx" )
 IP_BLACK_LIST=( $(cat $SSH_LOG | grep $W_FILTER | grep -E -o $D_FILTER | sort | uniq) )
 FILTERED_LIST=()
 
