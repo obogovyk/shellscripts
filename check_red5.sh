@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APP="http://redmine.cleveroad.com:5081"
+APP="http://example.com:8080"
 CURL="/usr/bin/curl"
 CHK=`${CURL} --silent -I ${APP}| head -1| awk {'print $2'}`
 COUNT=0
