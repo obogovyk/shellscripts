@@ -6,9 +6,9 @@ COUNT=0
 PROBES=4
 
 while [ "${CHK}" != "200" ]; do
-    echo "Continue starting..."
+	(( COUNT++ ))
+    echo "Check starting Red5Pro, (${COUNT}) probe..."
     sleep 30
-    (( COUNT++ ))
     CHK=`${CURL} --silent -I ${APP}| head -1| awk {'print $2'}`
 
     if [ ${COUNT} -ge ${PROBES} ]; then
