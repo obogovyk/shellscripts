@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Script: check_red5.sh
+# Author: Bogovyk Oleksanr <obogovyk@gmail.com>
+
 APP="http://example.com:8080"
 CURL="/usr/bin/curl"
 COUNT=0
