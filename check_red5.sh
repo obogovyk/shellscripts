@@ -15,7 +15,7 @@ while [ "${CHK}" != "200" ]; do
     CHK=`${CURL} --silent -I ${APP}| head -1| awk {'print $2'}`
 
     if [ ${COUNT} -ge ${PROBES} ]; then
-        echo "[ERROR]: Server failed to start after ($PROBES) probes."
+        echo "[ERROR]: Server failed to start after (${COUNT}) probes."
         exit 1
     fi
 done
