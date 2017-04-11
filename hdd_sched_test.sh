@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Script: hdd_sched_test.sh
+# Author: Oleksandr Bogovyk
+# Script: HDD Scheduler test
 
 DISC="sda"
 
