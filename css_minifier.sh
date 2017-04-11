@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Description: CSS & JS minifier using npm minifier
+# Author: Oleksandr Bogovyk
+# Script: CSS & JS minifier using npm minifier
 
 MINIFY=$(whereis minify|awk {'print $2'})
 TYPES=( "*.css" ) # "*.js"
