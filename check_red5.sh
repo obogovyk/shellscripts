@@ -4,8 +4,9 @@
 # Author: Bogovyk Oleksandr <obogovyk@gmail.com>
 
 URL="${1:-example.com}"
-APP="http://${URL}:5080"
-CURL="/usr/bin/curl"
+PORT=5080
+APP="http://${URL}:${PORT}"
+CURL=$(which curl)
 COUNT=0
 PROBES=4
 
