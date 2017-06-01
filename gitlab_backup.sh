@@ -12,7 +12,7 @@ TAR=$(which tar)
 RSYNC=$(which rsync)
 
 [ -z ${TAR} ] || [ -z ${RSYNC} ] &&  \
-{ echo "[INFO]: Necessary packages not found."; exit 1; }
+{ echo "[INFO]: Required packages not found."; exit 1; }
 
 is_backdir_mounted(){
     if [ $(cat /proc/mounts| grep "${STORAGE}"| wc -l) -lt 1 ]; then
@@ -21,8 +21,7 @@ is_backdir_mounted(){
 }
 
 backup_confdir() {
-    rm -rf ${GITLAB_BACKDIR}/*.tar.gz \
-    && cd /etc && cp -r ${GITLAB} "${PREFIX}-${GITLAB}-${DATE}" \
+    cd /etc && cp -r ${GITLAB} "${PREFIX}-${GITLAB}-${DATE}" \
     && ${TAR} -cvzf "${PREFIX}-${GITLAB}-${DATE}.tar.gz" "${PREFIX}-${GITLAB}-${DATE}" \
     && mv "${PREFIX}-${GITLAB}-${DATE}.tar.gz" ${GITLAB_BACKDIR} \
     && rm -rf "${PREFIX}-${GITLAB}-${DATE}"
