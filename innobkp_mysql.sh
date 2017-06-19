@@ -19,7 +19,7 @@ inno_prepare(){
 
 is_backdir_mounted(){
     if [ $(cat /proc/mounts| grep "${STORAGE}"| wc -l) -lt 1 ]; then
-        echo "[ERROR]: MySQL backup aborted. ${BKP_DIR} directory not mounted!" > /var/log/mysql.mount.err.log
+        echo "[ERROR]: MySQL backup aborted. ${STORAGE} directory not mounted!" > /var/log/mysql.backup.err.log
     fi
 }
 
@@ -29,4 +29,4 @@ if [ $? -eq 0 ]; then
     inno_prepare
 fi
 
-find ${BKP_DIR} -name "MySQL*" -type d -mtime +7 -delete
+find /mnt/storagebox/mysql.dev -type d -mtime +6 -exec rm -rf '{}' '+'
