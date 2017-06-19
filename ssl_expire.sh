@@ -11,5 +11,5 @@ if [ -n "$end_date" ]; then
     LEFT=$(( ($end_date_seconds-$now_seconds)/24/3600 ))
     echo $LEFT
 else
-    exit 124
+    exit 1
 fi
