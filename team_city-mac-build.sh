@@ -5,21 +5,19 @@
 BP="%BuildParams%"
 BP_ARR=$(echo $BP | sed -e 's/,/ /g')
 
+if [ -z ${BP} ] && { echo "[INFO]: '%BuildParams%' are empty."; exit 1; }
+
 if [ -d RESULT ]; then
     rm -rf RESULT/*
 else
     mkdir RESULT
 fi
 
-if [ "%DEV%" == "--dev" ]; then
-    DEV="%DEV%"
-else
+if [ "%DEV%" != "--dev" ]; then
     DEV=""
 fi
 
-if [ "%Autotests%" == "--autotest" ]; then
-    AUTOTESTS="%Autotests%"
-        else
+if [ "%Autotests%" != "--autotest" ]; then
     AUTOTESTS=""
 fi
 
@@ -59,7 +57,7 @@ for i in ${BP_ARR[@]}
             cd Src
             ./premake4 --target=Android $DEV $Autotests --config=Release xamarin
         fi
-        cd ..
+        cd ../
         xbuild "ProjectName\ProjectName.Android\ProjectName.Android.Android.csproj" /p:Configuration=Release /t:Clean
         xbuild "Src/ProjectName/ProjectName.Android/ProjectName.Android.Android.csproj" /p:Configuration=Release /t:SignAndroidPackage
 
