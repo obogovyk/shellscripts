@@ -8,7 +8,7 @@ BKP_DIR="${STORAGE}/docker"
 DATE_FMT=$(date +%d%m%Y)
 CONTAINER_ID="0a77b61f5229"
 VALUE=$(cat docker_id)
-PROJECT="melochenator"
+PROJECT=""
 
 [ -z ${DOCKER} ] && { echo "[INFO]: Required packages (docker) not found."; exit 1; }
 
