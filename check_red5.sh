@@ -3,9 +3,7 @@
 # Script: check_red5.sh
 # Author: Bogovyk Oleksandr <obogovyk@gmail.com>
 
-#!/bin/bash
-
-HOST="${1:-red5.inti.live}"
+HOST="${1:-example.com}"
 PORT=80
 URL="http://${HOST}:${PORT}"
 CURL="/usr/bin/curl"
