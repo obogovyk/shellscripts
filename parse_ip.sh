@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Script: parse_ip.sh
+# Description: parse NGINX log file for uniq IPs more that ${LIMIT} variable
+
 LOGFILE=$1
 UNIQ_IPS=`cat ${LOGFILE}| awk {'print $1'}| grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}"| sort| uniq`
 LIMIT=30
