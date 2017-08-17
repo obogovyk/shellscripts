@@ -6,11 +6,12 @@ DATE=$(date +%d.%m.%Y-%H.%M)
 STORAGE="/mnt/storagebox"
 INNO="/usr/bin/innobackupex"
 BKP_DIR="/mnt/storagebox/mysql.dev"
+PASS=*********
 
 [ -z ${INNO} ] && { echo "[INFO]: Required packages (innobackupex) not found."; exit 1; }
 
 inno_fullbackup(){
-    ${INNO} --defaults-file=/etc/my.cnf --user=root --password=0PC3uAlLQZti ${BKP_DIR}/MySQL-fullbak-${DATE} --no-timestamp
+    ${INNO} --defaults-file=/etc/my.cnf --user=root --password=${PASS} ${BKP_DIR}/MySQL-fullbak-${DATE} --no-timestamp
 }
 
 inno_prepare(){
