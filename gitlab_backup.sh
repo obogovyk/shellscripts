@@ -4,19 +4,18 @@ export LC_ALL=en_US.utf8
 
 PREFIX="conf"
 GITLAB="gitlab"
-STORAGE="/mnt/storagebox"
+STORAGE="/path/to/storage"
 GITLAB_BACKDIR="${STORAGE}/${GITLAB}"
 GITLAB_WORKDIR="/var/opt/gitlab"
 DATE=$(date +%d.%m.%Y-%H.%M)
 TAR=$(which tar)
 RSYNC=$(which rsync)
 
-[ -z ${TAR} ] || [ -z ${RSYNC} ] &&  \
-{ echo "[INFO]: Required packages not found."; exit 1; }
+[ -z ${TAR} ] || [ -z ${RSYNC} ] && { echo "[INFO]: Required packages not found."; exit 1; }
 
 is_backdir_mounted(){
     if [ $(cat /proc/mounts| grep "${STORAGE}"| wc -l) -lt 1 ]; then
-        echo "[ERROR]: Gitlab config backup aborted. ${GITLAB_BACKDIR} directory not mounted!" > /var/log/gitlab.mount.err.log
+        echo "[ERROR]: Gitlab config backup aborted. ${STORAGE} directory not mounted!" > /var/log/gitlab.backup.err.log
     fi
 }
 
@@ -32,4 +31,5 @@ if [ $? -eq 0 ]; then
     backup_confdir
 fi
 
-${RSYNC} -avz --modify-window=1 ${GITLAB_WORKDIR}/backups/ ${GITLAB_BACKDIR}/backups/
+find ${GITLAB_BACKDIR}/ -name "conf*" -type f -mtime +6 -delete
+${RSYNC} -avz --modify-window=1 ${GITLAB_WORKDIR}/backups/ ${GITLAB_BACKDIR}/backups/ --delete
