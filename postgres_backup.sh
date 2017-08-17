@@ -24,7 +24,7 @@ postgres_backup(){
 
 is_backdir_mounted(){
     if [ $(cat /proc/mounts| grep "${STORAGE}"| wc -l) -lt 1 ]; then
-        echo "[ERROR]: MySQL backup aborted. ${STORAGE} directory not mounted!" > /var/log/mysql.postgres.err.log
+        echo "[ERROR]: MySQL backup aborted. ${STORAGE} directory not mounted!" > /var/log/postgres.backup.err.log
     fi
 }
 
