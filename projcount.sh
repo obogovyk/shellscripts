@@ -2,9 +2,9 @@
 
 DIRS=0
 PRJ="/home/deploy/projects"
-STATES=($(ls ${PRJ}))
+TYPES=($(ls ${PRJ}))
 
-for x in ${STATES[@]}; do
+for x in ${TYPES[@]}; do
     for y in $(ls ${PRJ}/${x}); do
         if [ -d ${PRJ}/${x}/${y} ]; then
             DIRS=$((DIRS+1))
