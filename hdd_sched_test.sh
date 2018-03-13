@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Author: Oleksandr Bogovyk
-# Script: HDD Scheduler test
+# Description: HDD Scheduler test
 
 DISC=$1
 
