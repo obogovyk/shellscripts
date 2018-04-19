@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Author: Bogovyk Oleksanr <obogovyk@gmail.com>
+# Author: Bogovyk Oleksanr <obohovyk@posteo.net>
 # Description: Simple file backup (with history) using RSYNC Utility
 
 export LC_ALL=en_US.utf8
