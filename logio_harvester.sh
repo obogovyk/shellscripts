@@ -2,17 +2,17 @@
 
 # Description: harvester.conf file generator for Log.io server
 
-export LC_ALL=en_US.utf8
+export LC_LANG=en_US.utf8
 
-NODE_NAME="dev.example.com"
-PROJECT_DIR="/home/{{user}}/projects/dev"
-LOGIO_DIR="/home/{{user}}/.log.io"
+NODE_NAME="dev.cleveroad.com"
+PROJECT_DIR="/home/deploy/projects/dev"
+LOGIO_DIR="/home/deploy/.log.io"
 HARV_TMP="${LOGIO_DIR}/harvester.conf.tmp"
 HARV_PORT=1211
 PROJECT_LIST=( $(ls ${PROJECT_DIR}) )
 
-NODE_PROJECTS=("prj1" "prj2" "prj3" "prj4" "prj5" \
-    "prj6" "prj7" "prj8" "prj9" "prj10" "prj11" "prj12" \
+NODE_PROJECTS=("ayio" "ayoo" "cleveroad" "friendhub" "matchplayer" \
+    "osmo" "pqcode" "shirtapp" "startech" "trainaway" "yeo" "openmind" "metknow" \
 )
 
 clean_logs() {
