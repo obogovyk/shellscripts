@@ -2,7 +2,7 @@
 
 # Description: harvester.conf file generator for Log.io server
 
-export LC_LANG=en_US.utf8
+export LANG=en_US.utf8
 
 NODE_NAME="dev.cleveroad.com"
 PROJECT_DIR="/home/deploy/projects/dev"
