@@ -2,7 +2,7 @@
 
 # Description: harvester.conf file generator for Log.io server
 
-export LANG=en_US.utf8
+export LC_ALL=en_US.utf8
 
 NODE_NAME="dev.cleveroad.com"
 PROJECT_DIR="/home/deploy/projects/dev"
@@ -11,7 +11,7 @@ HARV_TMP="${LOGIO_DIR}/harvester.conf.tmp"
 HARV_PORT=1211
 PROJECT_LIST=( $(ls ${PROJECT_DIR}) )
 
-NODE_PROJECTS=("ayio" "ayoo" "cleveroad" "friendhub" "matchplayer" \
+NODE_PROJECTS=("ayio" "ayoo" "cleveroad" "friendhub" "menuplus" \
     "osmo" "pqcode" "shirtapp" "startech" "trainaway" "yeo" "openmind" "metknow" \
 )
 
@@ -85,7 +85,7 @@ for x in ${NODE_PROJECTS[@]}; do
                 if [ ${TMP_ARR[-1]} == ${i} ]; then
                     COMMA=""
                 fi
-                echo -e "      ${PROJECT_DIR}${LOG_PATH}/${i}${COMMA}" >> ${HARV_TMP}
+                echo -e "      \"${i}\"${COMMA}" >> ${HARV_TMP}
             done
             [ ${NODE_PROJECTS[-1]} == ${x} ] \
             && echo -e "    ]" >> ${HARV_TMP} || echo -e "    ]," >> ${HARV_TMP}
