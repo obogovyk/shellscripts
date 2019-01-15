@@ -4,16 +4,15 @@
 
 export LC_ALL=en_US.utf8
 
-NODE_NAME="dev.cleveroad.com"
-PROJECT_DIR="/home/deploy/projects/dev"
-LOGIO_DIR="/home/deploy/.log.io"
+NODE_NAME="dev.example.com"
+PROJECT_DIR="/home/app/projects"
+LOGIO_DIR="/home/app/.log.io"
 HARV_TMP="${LOGIO_DIR}/harvester.conf.tmp"
 HARV_PORT=1211
 PROJECT_LIST=( $(ls ${PROJECT_DIR}) )
 
-NODE_PROJECTS=("ayio" "ayoo" "cleveroad" "friendhub" "menuplus" \
-    "osmo" "pqcode" "shirtapp" "startech" "trainaway" "yeo" "openmind" "metknow" \
-)
+NODE_PROJECTS=("xxx" "xxx1" "xxx2" "xxx3" "xxx4" \
+    "xxx5" "xxx6" "xxx7" )
 
 clean_logs() {
 for x in ${NODE_PROJECTS[@]}; do
