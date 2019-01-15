@@ -1,19 +1,20 @@
 #!/bin/bash
 
-export LC_ALL=en_US.utf8
+export LC_LANG=en_US.utf8
 
+DATE=$(date +%d.%m.%Y-%H.%M)
 PG_DUMP="$(which pg_dump)"
 GZIP="$(which gzip)"
-DATE=$(date +%d.%m.%Y-%H.%M)
-STORAGE="/path/to/storage"
-BKP_DIR="${STORAGE}/postgresql"
-PASS=$(cat .sqlpass|grep root|cut -d: -f2)
+STORAGE="/mnt/storagebox"
+BKP_DIR="${STORAGE}/postgresql.fullbak"
+PASS=$(cat /opt/scripts/.dbpass|grep dev|cut -d: -f2)
+SERVICE="PostgreSQL"
 
 [ -z ${PG_DUMP} ] && { echo "[INFO]: Required packages (pg_dump) not found."; exit 1; }
 
 DATABASES=(
-    "*_dev"
-    "*_stage"
+    "test_dev"
+    "test_stage"
 )
 
 postgres_backup(){
@@ -23,8 +24,8 @@ postgres_backup(){
 }
 
 is_backdir_mounted(){
-    if [ $(cat /proc/mounts| grep "${STORAGE}"| wc -l) -lt 1 ]; then
-        echo "[ERROR]: MySQL backup aborted. ${STORAGE} directory not mounted!" > /var/log/postgres.backup.err.log
+    if [ $(cat /proc/mounts| grep -c "${STORAGE}") -lt 1 ]; then
+        echo "[ERROR]: ${SERVICE} backup aborted. ${STORAGE} directory not mounted." > /var/log/postgres.backup.err.log
     fi
 }
 
