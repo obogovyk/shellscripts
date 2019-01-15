@@ -11,8 +11,9 @@ HARV_TMP="${LOGIO_DIR}/harvester.conf.tmp"
 HARV_PORT=1211
 PROJECT_LIST=( $(ls ${PROJECT_DIR}) )
 
-NODE_PROJECTS=("project1" "project2" "project3" "example1" "example2" \
-    "example3" "example4" "example5")
+NODE_PROJECTS=("ayio" "ayoo" "cleveroad" "friendhub" "menuplus" \
+    "osmo" "pqcode" "shirtapp" "startech" "trainaway" "yeo" "openmind" "metknow" \
+)
 
 clean_logs() {
 for x in ${NODE_PROJECTS[@]}; do
