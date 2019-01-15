@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export LC_ALL=en_US.utf8
+export LC_LANG=en_US.utf8
 
 PREFIX="config"
 GITLAB="gitlab"
