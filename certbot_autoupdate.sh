@@ -25,6 +25,6 @@ for i in ${SORTED[@]}; do
     if [ "`date -d "${ED}" +%s`" -le "`date -d "${TODAYD}" +%s`" ]; then
         echo "Certificate: ${i} will be updated."
         certbot certonly --force-renew --webroot --webroot-path=/usr/share/nginx/html/${i} --cert-name ${i}
-        echo "DONE."
+        echo "Certificate ${i} has been updated."
     fi
 done
