@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This script is used for Gogs backup on GCP bucket.
+
 BKP_DIR="/home/git/gogs-backups"
 BUCKET_NAME="s3-example"
 S3CMD=$(which s3cmd|awk {'print $1'})
