@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script is used for Gogs backup on GCP bucket.
+# This script is used for Gogs backup on GCP bucket with 1 week history.
 
 BKP_DIR="/home/git/gogs-backups"
 BUCKET_NAME="s3-example"
