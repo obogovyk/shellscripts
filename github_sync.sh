@@ -14,6 +14,7 @@ GITLAB_REPOS=(
 MISSED_REPOS=()
 
 create_missing_repos() {
+for i in ${GITLAB_REPOS[@]}; do
     # curl -X POST https://partner-github.example.com/api/v3/orgs/project/repos -u ${USER}:${TOKEN} -d '{"name": "${r%.*}", "private": true}' > /dev/null 2>&1
     echo "${r%.*}"
 done
