@@ -8,7 +8,7 @@ TOKEN=''
 
 # List of Gitlab repositories
 GITLAB_REPOS=(
-	"http://gitlab.com/project/repo.git"
+  "http://gitlab.com/project/repo.git"
 )
 
 MISSED_REPOS=()
