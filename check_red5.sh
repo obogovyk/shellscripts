@@ -12,7 +12,7 @@ fi
 
 HOST=$1
 PORT=80
-CURL=$(which curl|awk {'print $1'})
+CURL=$(which curl)
 URL="http://${HOST}:${PORT}"
 COUNT=0
 PROBES=3
