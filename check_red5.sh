@@ -1,11 +1,19 @@
 #!/bin/bash
 
-# Script: check_red5.sh
+usage() {
+    echo "Usage: $0 <domain name>"
+}
 
-HOST="${1:-example.com}"
+if [ $# -ne 1 ]
+then
+    usage
+    exit 1
+fi
+
+HOST=$1
 PORT=80
+CURL=$(which curl|awk {'print $1'})
 URL="http://${HOST}:${PORT}"
-CURL="/usr/bin/curl"
 COUNT=0
 PROBES=3
 
@@ -21,8 +29,8 @@ while [ "${STAT}" != "200" ]; do
     check_url
     (( COUNT++ ))
     
-    if [ ${COUNT} -ge ${PROBES} ]; then
-        echo "[ERROR]: Red5Pro failed to start after ${PROBES} probes."
+    if [ ${COUNT} -eq ${PROBES} ]; then
+        echo "[ERROR]: Red5 failed to start after ${PROBES} probes."
         exit 1
     fi
 done
