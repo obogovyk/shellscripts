@@ -4,7 +4,7 @@
 VHOST="vhost.conf.txt"
 
 usage() {
-    echo "Usage: $0 <Specify NGINX femplate file>"
+    echo "Usage: $0 <NGINX femplate file>"
 }
 
 if [ $# -ne 1 ]
