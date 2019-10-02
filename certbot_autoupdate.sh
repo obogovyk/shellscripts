@@ -2,14 +2,22 @@
 
 export LC_LANG=en_US.utf8
 
-CERT_LIST=$(ls /etc/letsencrypt/live)
-CERT_DISABLE=("")
+CRT_PATH="/etc/letsencrypt/live"
+TMP_LIST=$(ls ${CRT_PATH})
+CRT_LIST=()
+CRT_LIST_DISABLED=()
 SORTED=()
 DBU=15
 
-for x in ${CERT_LIST[@]}; do
+for d in ${TMP_LIST[@]}; do
+    if [ -d "${CRT_PATH}/${d}" ]; then
+        CRT_LIST+=("${d}")
+    fi
+done
+
+for x in ${CRT_LIST[@]}; do
     skip=
-    for y in ${CERT_DISABLE[@]}; do
+    for y in ${CRT_LIST_DISABLED[@]}; do
         [[ $x == $y ]] && { skip=1; break; }
     done
     [[ -n $skip ]] || SORTED+=("${x}")
