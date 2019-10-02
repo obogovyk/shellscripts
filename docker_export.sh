@@ -22,7 +22,7 @@ docker_export() {
 
 is_backdir_mounted(){
     if [ $(cat /proc/mounts| grep "${STORAGE}"| wc -l) -lt 1 ]; then
-        echo "[ERROR]: Docker backup aborted. ${STORAGE} directory not mounted!" > /var/log/docker.export.err.log
+        echo "[ERR]: Docker backup aborted. ${STORAGE} directory not mounted!" > /var/log/docker.export.err.log
     fi
 }
 
