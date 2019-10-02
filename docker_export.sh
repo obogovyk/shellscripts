@@ -10,7 +10,7 @@ CONTAINER_ID="0a77b61f5229"
 VALUE=$(cat docker_id)
 PROJECT=""
 
-[ -z ${DOCKER} ] && { echo "[INFO]: Required packages (docker) not found."; exit 1; }
+[ -z ${DOCKER} ] && { echo "[ERR]: Required packages (docker) not found."; exit 1; }
 
 increment_id() {
     echo "$(( ${VALUE}+1 ))" > docker_id
