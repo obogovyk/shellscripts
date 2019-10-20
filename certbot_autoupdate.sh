@@ -34,6 +34,9 @@ for i in ${SORTED[@]}; do
 
     if [ "`date -d "${ED}" +%s`" -le "`date -d "${TODAYD}" +%s`" ]; then
         echo "Certificate: ${i} will be updated."
+        ### FOR AWS
+        # certbot certonly --dns-route53 --force-renewal -d ${i} --dns-route53-propagation-seconds 45 --deploy-hook 'systemctl restart nginx'
+        ### FOR GCP
         certbot certonly --dns-google --dns-google-credentials /etc/letsencrypt/.secrets/google.json --dns-google-propagation-seconds 90 --force-renewal -d ${i}
         service ${WEBSRV} restart
     fi
