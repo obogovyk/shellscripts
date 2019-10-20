@@ -7,6 +7,7 @@ TMP_LIST=$(ls ${CRT_PATH})
 CRT_LIST=()
 CRT_LIST_DISABLED=()
 SORTED=()
+WEBSRV="nginx"
 DBU=15
 
 for d in ${TMP_LIST[@]}; do
@@ -34,6 +35,6 @@ for i in ${SORTED[@]}; do
     if [ "`date -d "${ED}" +%s`" -le "`date -d "${TODAYD}" +%s`" ]; then
         echo "Certificate: ${i} will be updated."
         certbot certonly --dns-google --dns-google-credentials /etc/letsencrypt/.secrets/google.json --dns-google-propagation-seconds 90 --force-renewal -d ${i}
-        service nginx reload
+        service ${WEBSRV} restart
     fi
 done
