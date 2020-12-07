@@ -19,5 +19,5 @@ for i in ${flist[@]}; do
     fi
 done
 
-paste $size_file $count_file -d "	" > $report_file
+paste $size_file $count_file -d " " > $report_file
 rm -rf /tmp/compare_f.*
