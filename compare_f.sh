@@ -6,7 +6,7 @@ root_dir="/data"
 flist=$(find $root_dir -maxdepth 1 -type d|tail -n +2)
 size_file="/tmp/compare_f.size"
 count_file="/tmp/compare_f.count"
-report_file="/data/compare_f.report"
+report_file="$root_dir/compare_f.report"
 
 [[ -f $report_file ]] && cat /dev/null > $report_file
 
