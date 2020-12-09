@@ -3,7 +3,7 @@
 set -e
 
 root_dir="/data"
-flist=$(find $root_dir -maxdepth 1 -type d|tail -n +2)
+flist=$(find $root_dir -maxdepth 1 -type d|tail -n +2|sort)
 size_file="/tmp/compare_f.size"
 count_file="/tmp/compare_f.count"
 report_file="$root_dir/compare_f.report"
