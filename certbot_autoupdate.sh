@@ -24,6 +24,8 @@ for x in ${CRT_LIST[@]}; do
     [[ -n $skip ]] || SORTED+=("${x}")
 done
 
+source /opt/do-certupdate/bin/activate
+
 for i in ${SORTED[@]}; do
     CERT=/etc/letsencrypt/live/${i}/cert.pem
 
@@ -34,10 +36,9 @@ for i in ${SORTED[@]}; do
 
     if [ "`date -d "${ED}" +%s`" -le "`date -d "${TODAYD}" +%s`" ]; then
         echo "Certificate: ${i} will be updated."
-        ### FOR AWS
-        # certbot certonly --dns-route53 --force-renewal -d ${i} --dns-route53-propagation-seconds 45 --deploy-hook 'systemctl restart nginx'
-        ### FOR GCP
-        certbot certonly --dns-google --dns-google-credentials /etc/letsencrypt/.secrets/google.json --dns-google-propagation-seconds 90 --force-renewal -d ${i}
-        service ${WEBSRV} restart
+        certbot certonly --dns-digitalocean --dns-digitalocean-credentials /usr/share/do-certupdate/.do.ini --register-unsafely-without-email --force-renewal -d ${i}
+        systemctl restart ${WEBSRV}
     fi
 done
+
+deactivate
